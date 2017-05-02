@@ -24,5 +24,30 @@ end
 
 Then(/^I cancel SignUp/) do
   find(:xpath, '//div[@id = "signup"]/descendant::img[@class = "closecross"]').click
-  
+end
+
+When(/^I open login form$/) do
+  find(:id, 'login-b').click
+  find(:xpath, '//div[@id = "login"]/descendant::input[@name = "login"]').visible?
+  find(:xpath, '//div[@id = "login"]/descendant::input[@name = "password"]').visible?
+  find(:xpath, '//div[@id = "login"]/descendant::button[contains(@class,"button")]').visible?
+end
+
+When(/^I enter (.*) in Login email$/) do |email|
+  find(:xpath, '//div[@id = "login"]/descendant::input[@name = "login"]').send_keys email
+end
+
+When(/^I enter (.*) in Login password$/) do |password|
+  find(:xpath, '//div[@id = "login"]/descendant::input[@name = "password"]').send_keys password
+end
+
+When(/^I click Login button$/) do
+  find(:xpath, '//div[@id = "login"]/descendant::button[contains(@class,"button")]').click
+end
+
+Then(/^I Validate successful login$/) do
+  find(:xpath, '//div[@id = "testDataTitle"]').visible?
+  find(:xpath, '//div[@id = "projectTitle"]').visible?
+  find(:xpath, '//div[@id = "logoutButton"]').visible?
+  find(:xpath, '//div[@id = "stepMainView"]').visible?
 end
